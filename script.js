@@ -12,17 +12,18 @@ Print the results of all three checks and a strength rating
     all 3 checks pass: strong
 */
 
+
+const MIN_LENGTH = 18;
+
 function createPassword(){
     let password = prompt("Please create a new password:", "New Password");
     return password;
-    // return "Passw1rd";
+    // return "Paaassword";
 }
 
 // console.log(createPassword());
 
 function hasMinLength(password, minLength){  
-    minLength = 8;
-    
     if (password.length >= minLength){
        return true;
     } else {
@@ -49,7 +50,7 @@ function hasNumber(password){
     for (let i = 0; i < password.length; i++){
         let char = password[i];
 
-        if (typeof(char === "number") && char <= 9 && char >= 0){
+        if (char >= "0" && char <= "9") {
             return true;
         }
     }
@@ -61,15 +62,15 @@ function hasNumber(password){
 function getStrength(password){
     let strength = 0;
 
-    if (hasMinLength(password) === true){
+    if (hasMinLength(password, MIN_LENGTH)){
         strength++;
     }
 
-    if (hasUpperCase(password) === true){
+    if (hasUpperCase(password)){
         strength++;
     }
     
-    if (hasNumber(password) === true){
+    if (hasNumber(password)){
         strength++;
     }
 
@@ -85,11 +86,11 @@ function getStrength(password){
 // console.log(getStrength());
 
 function checkPassword(password) {
-    pass = password;
+   let pass = password;
     
     console.log("Password: " + pass);
     console.log("Strength: " + getStrength(pass));
-    console.log("✓ Min length " + "(" + "8" + "): " + hasMinLength(pass));
+    console.log("✓ Min length " + "(" + MIN_LENGTH + "): " + hasMinLength(pass,MIN_LENGTH));
     console.log("✓ Has uppercase: " + hasUpperCase(pass));
     console.log("✓ Has number: " + hasNumber(pass));
 }
